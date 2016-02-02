@@ -10,7 +10,7 @@ public class Producer extends Thread {
         super.run();
 
         int n = new Random().nextInt();
-        
+
         System.out.println("Number " + n + " generated - sending to buffer");
     }
 }

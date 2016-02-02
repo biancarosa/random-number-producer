@@ -10,6 +10,7 @@ public class Executor {
     public static void main(String[] args) {
         if (args.length != 1) {
             System.err.println("Wrong number of args provided");
+            return;
         }
         int numberOfThreads = 0;
         try {
