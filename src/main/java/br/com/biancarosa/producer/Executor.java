@@ -11,11 +11,15 @@ public class Executor {
         if (args.length != 1) {
             System.err.println("Wrong number of args provided");
         }
-        int numberOfThreads;
+        int numberOfThreads = 0;
         try {
             numberOfThreads = Integer.parseInt(args[0]);
         } catch (NumberFormatException e) {
             System.err.println("Number of threads must be a number");
+        }
+
+        for (int i = 0; i < numberOfThreads; ++i) {
+            new Producer().start();
         }
 
     }
