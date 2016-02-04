@@ -4,6 +4,11 @@ import java.util.Random;
 
 public class Producer extends Thread {
 
+    private String name;
+
+    public Producer(String name) {
+        this.name = name;
+    }
 
     @Override
     public void run() {

@@ -18,7 +18,7 @@ public class Executor {
         }
 
         for (int i = 0; i < numberOfThreads; ++i) {
-            new Producer().start();
+            new Producer("Producer"+i).start();
         }
 
     }
