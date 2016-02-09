@@ -17,7 +17,7 @@ public class Executor {
             System.err.println("Number of threads must be a number");
         }
 
-        for (int i = 0; i < numberOfThreads; ++i) {
+        for (int i = 1; i <= numberOfThreads; ++i) {
             new Producer("Producer"+i).start();
         }
 

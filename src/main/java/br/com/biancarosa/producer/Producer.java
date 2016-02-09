@@ -16,25 +16,34 @@ public class Producer extends Thread {
         this.name = name;
     }
 
+    public void sendNumberToBuffer(int n) {
+        String host = "127.0.0.1";
+        try {
+            Socket echoSocket = new Socket(host, 8000);
+            PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
+            out.println(name + "," + n);
+            System.out.println("Number " + n + " sent to buffer");
+            echoSocket.close();
+        } catch (UnknownHostException e) {
+            System.err.println("Don't know about host " + host);
+        } catch (IOException e) {
+            System.err.println("Couldn't get I/O for the connection to " + host);
+        }
+    }
+
     @Override
     public void run() {
         super.run();
 
-        int n = new Random().nextInt();
-        try {
-            Socket echoSocket = new Socket("127.0.0.1", 8000);
-            PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
-
-            out.println(n);
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + "localhost");
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to " +
-                    "localhost");
-            System.exit(1);
+        while(true) {
+            int n = new Random().nextInt();
+            System.out.println("Number " + n + " generated - sending to buffer");
+            sendNumberToBuffer(n);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-
-        System.out.println("Number " + n + " generated - sending to buffer");
     }
 }
