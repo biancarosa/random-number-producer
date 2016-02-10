@@ -30,7 +30,6 @@ public class Producer extends Thread {
             System.out.println("Message received from the server : " + message);
 
             String[] messArgs = message.split("\\?");
-            //full
             if (messArgs[1].equals("true")) {
                 Producer.wait = true;
             } else {
