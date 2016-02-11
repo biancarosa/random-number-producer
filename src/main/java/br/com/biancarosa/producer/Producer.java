@@ -3,6 +3,7 @@ package br.com.biancarosa.producer;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.Random;
 
 public class Producer extends Thread {
@@ -21,6 +22,7 @@ public class Producer extends Thread {
 
     private void sendNumberToBuffer(int n) {
         try {
+            Date startDate = new Date();
             Socket echoSocket = new Socket(host, port);
             PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
             out.println(name + "," + n);
@@ -36,10 +38,12 @@ public class Producer extends Thread {
             } else {
                 Producer.wait = false;
             }
-            if (messArgs[2].equals("false")) {
+            Date endDate = new Date();
+            if (messArgs[3].equals("false")) {
                 System.out.println(name + " tentou colocar item no Buffer cheio");
             } else {
-                System.out.println("Valor " + n + " adicionado em Buffer pelo " + name);
+                long timeDiff = endDate.getTime() - startDate.getTime();
+                System.out.println("Colocado o valor " + n  + " no Buffer pelo " + name + " em " + timeDiff + "ms");
             }
             echoSocket.close();
         } catch (UnknownHostException e) {
