@@ -2,7 +2,6 @@ import br.com.biancarosa.producer.Executor;
 import junit.framework.TestCase;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
@@ -10,9 +9,6 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 public class ExecutorTest extends TestCase {
-
-    @Rule
-    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -36,7 +32,6 @@ public class ExecutorTest extends TestCase {
     @Test
     public void testInputWithWrongNumberOfArgs(){
         String[] arr = new String[]{};
-        exit.expectSystemExitWithStatus(1);
         Executor.main(arr);
 
         assertEquals("Passe como argumento o número de threads, o host do buffer e a porta\n", errContent.toString());
@@ -45,8 +40,6 @@ public class ExecutorTest extends TestCase {
     @Test
     public void testInputWithText() {
         String[] arr =  { "A" };
-
-        exit.expectSystemExitWithStatus(1);
 
         Executor.main(arr);
 

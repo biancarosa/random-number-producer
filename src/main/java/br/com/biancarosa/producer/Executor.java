@@ -18,6 +18,7 @@ public class Executor {
                 try {
                     port = Integer.parseInt(args[2]);
                     for (int i = 1; i <= numberOfThreads; ++i) {
+                        System.out.println(host + " - " + port);
                         new Producer("Produtor"+i, host, port).start();
                     }
                 } catch (NumberFormatException e) {
