@@ -8,16 +8,19 @@ import java.util.Random;
 public class Producer extends Thread {
 
     private String name;
+    private String host;
+    private int port;
     static boolean wait = false;
 
-    public Producer(String name) {
+    public Producer(String name, String host, int port) {
         this.name = name;
+        this.host = host;
+        this.port = port;
     }
 
     public void sendNumberToBuffer(int n) {
-        String host = "127.0.0.1";
         try {
-            Socket echoSocket = new Socket(host, 8000);
+            Socket echoSocket = new Socket(host, port);
             PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
             out.println(name + "," + n);
             System.out.println("Number " + n + " sent to buffer");
